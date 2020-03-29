@@ -13,37 +13,37 @@ void getCurrentPosition(const FunctionCallbackInfo<Value>& args) {
 
   LocationManager* locationManager = [[LocationManager alloc] init];
 
-  if (args.Length() == 1) {
-    if (args[0]->IsObject()) {
-      Local<Object> options = args[0]->ToObject();
+  // if (args.Length() == 1) {
+  //   if (args[0]->v8::IsObject()) {
+  //     Local<Object> options = args[0]->v8::ToObject();
 
-      Local<String> maximumAgeKey = String::NewFromUtf8(isolate, "maximumAge");
-      if (options->Has(maximumAgeKey)) {
-        // Anything less than 100ms doesn't make any sense
-        locationManager.maximumAge = fmax(
-          100, options->Get(maximumAgeKey)->NumberValue()
-        );
-        locationManager.maximumAge /= 1000.0;
-      }
+  //     Local<String> maximumAgeKey = String::NewFromUtf8(isolate, "maximumAge");
+  //     if (options->v8::Has(maximumAgeKey)) {
+  //       // Anything less than 100ms doesn't make any sense
+  //       locationManager.maximumAge = fmax(
+  //         100, options->v8::Get(maximumAgeKey)->v8::NumberValue()
+  //       );
+  //       locationManager.maximumAge /= 1000.0;
+  //     }
 
-      Local<String> enableHighAccuracyKey = String::NewFromUtf8(
-        isolate, "enableHighAccuracy"
-      );
-      if (options->Has(enableHighAccuracyKey)) {
-        locationManager.enableHighAccuracy = options->Get(
-          enableHighAccuracyKey
-        )->BooleanValue();
-      }
+  //     Local<String> enableHighAccuracyKey = String::NewFromUtf8(
+  //       isolate, "enableHighAccuracy"
+  //     );
+  //     if (options->v8::Has(enableHighAccuracyKey)) {
+  //       locationManager.enableHighAccuracy = options->v8::Get(
+  //         enableHighAccuracyKey
+  //       )->v8::BooleanValue();
+  //     }
 
-      Local<String> timeout = String::NewFromUtf8(
-        isolate, "timeout"
-      );
-      if (options->Has(timeout)) {
-        locationManager.timeout = options->Get(timeout)->NumberValue();
-      }
+  //     Local<String> timeout = String::NewFromUtf8(
+  //       isolate, "timeout"
+  //     );
+  //     if (options->v8::Has(timeout)) {
+  //       locationManager.timeout = options->v8::Get(timeout)->v8::NumberValue();
+  //     }
 
-    }
-  }
+  //   }
+  // }
 
   if (![CLLocationManager locationServicesEnabled]) {
     isolate->ThrowException(
@@ -123,7 +123,7 @@ void getCurrentPosition(const FunctionCallbackInfo<Value>& args) {
   args.GetReturnValue().Set(obj);
 }
 
-void Initialise(Handle<Object> exports) {
+void Initialise(v8::Handle<Object> exports) {
   NODE_SET_METHOD(exports, "getCurrentPosition", getCurrentPosition);
 }
 
