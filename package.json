@@ -1,5 +1,5 @@
 {
-  "name": "macos-location",
+  "name": "macos-location-electron",
   "version": "1.3.1",
   "description": "Wrapper around macOS CoreLocation services.",
   "keywords": [
